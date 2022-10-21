@@ -1,0 +1,213 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "collapsed_sections": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "dumsjvtoi8r3"
+      },
+      "outputs": [],
+      "source": [
+        "import numpy as np \n",
+        "import matplotlib.pyplot as plt \n",
+        "import pandas as pd\n",
+        "# Importing the dataset \n",
+        "data = pd.read_csv('train.csv') \n",
+        "Y = data.fetal_health\n",
+        "X = data.drop('fetal_health',axis=1)\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Splitting the dataset into Training set and Test set \n",
+        "from sklearn.model_selection import train_test_split \n",
+        "X_train, X_test, Y_train, test_Y = train_test_split(X, Y, test_size = 0.2, random_state = 101)\n"
+      ],
+      "metadata": {
+        "id": "J7poZViyjD_J"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.naive_bayes import GaussianNB\n",
+        "\n",
+        "gnb = GaussianNB()   #Create a Gaussian Classifier\n",
+        "\n",
+        "gnb.fit(X_train, Y_train)   #Train the model using the training sets\n",
+        "\n",
+        "y_pred = gnb.predict(X_test)   #Predict the response for test dataset\n",
+        "y_pred = model.predict(X_test)\n",
+        "y_pred"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KlH6MB4JjFuG",
+        "outputId": "56e61bf5-5661-4661-f82b-5f369b45746d"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([1., 3., 1., 1., 1., 2., 2., 3., 1., 1., 1., 1., 2., 1., 1., 1., 1.,\n",
+              "       1., 1., 2., 2., 1., 1., 1., 2., 1., 1., 1., 1., 1., 1., 1., 2., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 2., 1., 1., 1., 1., 1., 3.,\n",
+              "       1., 1., 1., 1., 1., 1., 3., 1., 1., 1., 2., 2., 2., 1., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 2., 1., 1., 1., 2., 1., 2., 1., 1., 1., 2., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 1., 1., 2., 1.,\n",
+              "       3., 1., 1., 1., 1., 2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,\n",
+              "       2., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 1., 3., 3., 3., 1., 1.,\n",
+              "       1., 1., 1., 1., 3., 1., 1., 1., 1., 1., 2., 1., 2., 2., 2., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 2., 1., 1.,\n",
+              "       1., 2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 3., 2., 1., 1., 2.,\n",
+              "       1., 3., 3., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 2., 1.,\n",
+              "       2., 1., 3., 2., 1., 1., 2., 1., 1., 1., 2., 1., 1., 1., 3., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 1., 3., 2., 2., 1., 1., 1., 1., 3.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2.,\n",
+              "       2., 2., 1., 1., 1., 3., 2., 1., 1., 1., 1., 3., 3., 1., 1., 1., 1.,\n",
+              "       1., 2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 3., 1., 1., 1., 3., 1., 1., 1., 3., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,\n",
+              "       1., 1., 2., 1., 1., 1., 1., 1., 3., 1., 1., 1., 1., 1., 1., 1., 1.])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Import scikit-learn metrics module for accuracy_score\n",
+        "from sklearn import metrics\n",
+        "print(\"Accuracy:\",metrics.accuracy_score(test_Y, y_pred))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "FjuYPV3FjIw2",
+        "outputId": "a762e1b7-7fcd-4252-b43e-c4de5cb62d2c"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy: 0.9294117647058824\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "Validation_test = pd.read_csv('test.csv') \n",
+        "val_pred =model.predict(Validation_test)\n",
+        "\n",
+        "val_pred"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "m-JX4fr6jUTY",
+        "outputId": "f55852c8-5457-4841-e2cc-b5ff3d899f45"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([1., 1., 2., 1., 2., 2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2.,\n",
+              "       3., 1., 2., 1., 3., 2., 1., 2., 1., 1., 1., 1., 3., 2., 2., 1., 2.,\n",
+              "       3., 1., 1., 1., 1., 2., 2., 1., 1., 1., 1., 1., 1., 3., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 2., 2., 1., 1., 1., 1., 1., 2., 1., 1.,\n",
+              "       1., 2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 3., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 3., 1., 1., 2., 1., 2., 1., 1., 1., 1., 3., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 1., 1., 1., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 3., 1., 1., 1., 1., 1., 2., 1., 1., 1., 1., 1., 1.,\n",
+              "       1., 2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 3., 1.,\n",
+              "       2., 2., 3., 2., 1., 1., 1., 1., 3., 1., 2., 1., 1., 2., 1., 1., 1.,\n",
+              "       3., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 2., 1.,\n",
+              "       1., 1., 3., 2., 1., 2., 1., 1., 1., 2., 1., 1., 3., 1., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 3., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 1., 1., 1., 1., 1., 1.,\n",
+              "       1., 1., 1., 3., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,\n",
+              "       3., 1., 3., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 1., 3., 1.,\n",
+              "       1., 1., 1., 1., 2., 1., 1., 1., 3., 1., 1., 1., 1., 3., 3., 1., 2.,\n",
+              "       1., 1., 1., 1., 1., 1., 3., 1., 1., 1., 1., 3., 1., 1., 1., 3., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,\n",
+              "       1., 1., 3., 1., 1., 1., 1., 1., 2., 1., 1., 2., 2., 1., 1., 1., 1.,\n",
+              "       1., 1., 1., 2., 1., 1., 2., 1., 2., 1., 2., 1., 1., 1., 1., 1., 2.,\n",
+              "       1., 3., 3., 1., 2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 1.,\n",
+              "       2., 1., 1., 2., 1., 1., 1., 1., 1., 2., 1., 1., 1., 1., 1., 1., 2.,\n",
+              "       1., 1., 2., 1., 1., 1., 1., 1., 1., 1., 2., 1., 1., 1., 1., 1., 1.,\n",
+              "       1., 1., 1., 1., 1., 1., 1., 2., 2., 1., 1., 1., 3., 1., 1., 1., 1.,\n",
+              "       1.])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "output=[val_pred]\n",
+        "df=pd.DataFrame(output)\n",
+        "new=df.to_csv(r'output.csv',index=None,header=True)\n",
+        "print(df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Hg6pMxKMjPWL",
+        "outputId": "5c2d80c3-cb5c-4a44-8657-baabc15772e9"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "   0    1    2    3    4    5    6    7    8    9    ...  416  417  418  419  \\\n",
+            "0  1.0  1.0  2.0  1.0  2.0  2.0  1.0  1.0  1.0  1.0  ...  2.0  1.0  1.0  1.0   \n",
+            "\n",
+            "   420  421  422  423  424  425  \n",
+            "0  3.0  1.0  1.0  1.0  1.0  1.0  \n",
+            "\n",
+            "[1 rows x 426 columns]\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
